@@ -33,7 +33,6 @@ jobs:
           github_pat: ${{ secrets.GITHUB_TOKEN }}  # GitHub personal access token for accessing private repositories
           soft_fail_on: 'CKV_AWS_3'       # Do not return an error code only for specific check identifiers
           hard_fail_on: 'CKV_AWS_4'       # Return an error code only for specific check identifiers
-          download_external_modules: 'true'  # Download external terraform modules from public repositories
           enable_secrets_scan_all_files: 'true'  # Scan all files for secrets
           log_level: 'INFO'               # Set log level
           
