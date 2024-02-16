@@ -1,0 +1,21 @@
+name: PR
+
+on: pull_request
+
+permissions: read-all
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      
+      - name: Run IaC scan
+        uses: ./
+        with:
+          directory: ./
+          output_format: json
+          
+          # Other optional inputs can be specified here
+          
