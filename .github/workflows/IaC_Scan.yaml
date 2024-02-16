@@ -22,6 +22,7 @@ jobs:
         with:
           directory: ./
           output_format: json
+          soft-fail: 0
           
           # Other optional inputs can be specified here
           
