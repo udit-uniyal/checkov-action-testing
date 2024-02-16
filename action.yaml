@@ -86,4 +86,4 @@ runs:
     - ${{ inputs.external_checks_repos }}
     - ${{ inputs.download_external_modules }}
     - ${{ inputs.enable_secrets_scan_all_files }}    
-    - "-q"
+    - "/dev/null"
