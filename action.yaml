@@ -24,11 +24,53 @@ inputs:
     description: 'The format of the output. cli, json, junitxml, github_failed_only, or sarif (comma separated)'
     required: false
     default: 'json'
+  soft_fail:
+    description: 'do not return an error code if there are failed checks'
+    required: false
+  framework:
+    description: 'run only on a specific infrastructure'
+    required: false
+  skip_framework:
+    description: 'skip a specific infrastructure'
+    required: false
+  github_pat:
+    description: 'Environment variable name for a Github personal access token for scanning external modules sourced from private repositories'
+    required: false
+  soft_fail_on:
+    description: 'Do not return an error code only for specific check identifiers (comma separated)'
+    required: false
+  hard_fail_on:
+    description: 'Return an error code only for specific check identifiers (comma separated)'
+    required: false
+  download_external_modules:
+    description: 'download external terraform modules from public git repositories and terraform registry:true, false'
+    required: false
+  external_checks_dirs:
+    description: 'comma separated list of external (custom) checks directories'
+    required: false
+  enable_secrets_scan_all_files:
+    description: 'Scan all files for secrets'
+    required: false
+  enable_secrets_scan_all_files:
+    description: 'Scan all files for secrets'
+    required: false
+  log_level:
+    description: 'log level'
+    required: false
+    default: 'WARNING'
+  config_file:
+    description: 'checkov configuration file'
+    required: false
+  baseline:
+    description: 'Path to a .checkov.baseline file to compare. Report will include only failed checks that are not in the baseline'
+    required: false
 
-
+    
 branding:
   icon: 'shield'
   color: 'purple'
+
+  
 runs:
   using: 'docker'
   image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
@@ -40,3 +82,10 @@ runs:
     - ${{ inputs.compact }}
     - ${{ inputs.quiet }}
     - ${{ inputs.output_format }}
+    - ${{ inputs.soft_fail }}
+    - ${{ inputs.framework }}
+    - ${{ inputs.skip_framework }}
+    - ${{ inputs.external_checks_dirs }}
+    - ${{ inputs.external_checks_repos }}
+    - ${{ inputs.download_external_modules }}
+    - ${{ inputs.enable_secrets_scan_all_files }}    
