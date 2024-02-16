@@ -51,9 +51,6 @@ inputs:
   enable_secrets_scan_all_files:
     description: 'Scan all files for secrets'
     required: false
-  enable_secrets_scan_all_files:
-    description: 'Scan all files for secrets'
-    required: false
   log_level:
     description: 'log level'
     required: false
