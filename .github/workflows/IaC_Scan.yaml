@@ -20,9 +20,21 @@ jobs:
       - name: Run IaC scan
         uses: ./
         with:
-          directory: ./
-          output_format: json
-          soft_fail: true
+          file: 'example.tf'               # Provide the path to the file you want to scan
+          directory: './terraform-files/'  # Provide the directory where your infrastructure code is located
+          check: 'CKV_AWS_1'              # Run scan only on a specific check identifier
+          skip_check: 'CKV_AWS_2'         # Skip a specific check identifier
+          compact: 'true'                 # Do not display code blocks in output
+          quiet: 'true'                   # Display only failed checks
+          output_format: 'json'           # The format of the output
+          soft_fail: 'false'              # Do not return an error code if there are failed checks
+          framework: 'aws'                # Run only on a specific infrastructure
+          skip_framework: 'azure'         # Skip a specific infrastructure
+          github_pat: ${{ secrets.GITHUB_TOKEN }}  # GitHub personal access token for accessing private repositories
+          soft_fail_on: 'CKV_AWS_3'       # Do not return an error code only for specific check identifiers
+          hard_fail_on: 'CKV_AWS_4'       # Return an error code only for specific check identifiers
+          download_external_modules: 'true'  # Download external terraform modules from public repositories
+          enable_secrets_scan_all_files: 'true'  # Scan all files for secrets
+          log_level: 'INFO'               # Set log level
           
-          # Other optional inputs can be specified here
           
