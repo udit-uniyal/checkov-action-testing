@@ -28,7 +28,7 @@ jobs:
           quiet: 'true'                   # Display only failed checks
           output_format: 'json'           # The format of the output
           soft_fail: 'false'              # Do not return an error code if there are failed checks
-          framework: 'aws'                # Run only on a specific infrastructure
+          framework: 'arm'                # Run only on a specific infrastructure
           skip_framework: 'azure'         # Skip a specific infrastructure
           github_pat: ${{ secrets.GITHUB_TOKEN }}  # GitHub personal access token for accessing private repositories
           soft_fail_on: 'CKV_AWS_3'       # Do not return an error code only for specific check identifiers
