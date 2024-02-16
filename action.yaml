@@ -70,7 +70,7 @@ branding:
   
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21 --quiet'
+  image: --quiet 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
   args:
     - ${{ inputs.file }}
     - ${{ inputs.directory }}
