@@ -49,31 +49,20 @@ branding:
   color: 'purple'
 
   
-jobs:
-  scan_job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Scan against infrastructure as code
-        uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
-        with:
-          args: |
-     #       ${{ inputs.file }}
-            ${{ inputs.directory }}
-            ${{ inputs.compact }}
-            ${{ inputs.quiet }}
-            ${{ inputs.output_format }}
-            ${{ inputs.soft_fail }}
-            ${{ inputs.framework }}
-            ${{ inputs.skip_framework }}
-            ${{ inputs.token }}
-            ${{ inputs.endpoint }}
-            ${{ inputs.tenant_id }}
-            
-      - name: Push report to CSPM panel
-        run: |
-          curl --location --request POST "https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
-            --header "Tenant-Id: ${{ inputs.tenant_id }}" \
-            --header "Authorization: Bearer ${{ inputs.token }}" \
-            --form "file=@\"./results.json\""
-        shell: bash
-
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
+  args:
+    - ${{ inputs.file }}
+    - ${{ inputs.directory }}
+    - ${{ inputs.compact }}
+    - ${{ inputs.quiet }}
+    - ${{ inputs.output_format }}
+    - ${{ inputs.soft_fail }}
+    - ${{ inputs.framework }}
+    - ${{ inputs.skip_framework }}\
+   steps:
+    - name: Push report to CSPM panel
+      run: |
+        curl --location --request POST 'https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false' --header 'Tenant-Id: ${{ inputs.tenant_id  }}' --header 'Authorization: Bearer ${{ inputs.token }}' --form 'file=@"./results.json"'
+      shell: bash
