@@ -65,6 +65,10 @@ jobs:
             ${{ inputs.soft_fail }}
             ${{ inputs.framework }}
             ${{ inputs.skip_framework }}
+            ${{ inputs.token }}
+            ${{ inputs.endpoint }}
+            ${{ inputs.tenant_id }}
+            
       - name: Push report to CSPM panel
         run: |
           curl --location --request POST "https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
