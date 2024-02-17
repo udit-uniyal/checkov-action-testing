@@ -61,7 +61,6 @@ runs:
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
     - ${{ inputs.skip_framework }}
-    - ${{ secrets.GITHUB_TOKEN }}
     
  - name: Push report to CSPM panel
   run: |
