@@ -33,6 +33,16 @@ inputs:
   enable_secrets_scan_all_files:
     description: 'Scan all files for secrets'
     required: false
+  token:
+    description: 'The token for authenticating with the CSPM panel.'
+    required: true
+  tenant_id:
+    description: 'The ID of the tenant associated with the CSPM panel.'
+    required: true
+  endpoint:
+    description: 'The URL of the CSPM panel to push the scan results to.'
+    required: true
+    default: 'cspm.demo.accuknox.com'
     
 branding:
   icon: 'shield'
@@ -52,5 +62,12 @@ runs:
     - ${{ inputs.framework }}
     - ${{ inputs.skip_framework }}
     - ${{ secrets.GITHUB_TOKEN }}
- 
+    
+ - name: Push report to CSPM panel
+  run: |
+    curl --location --request POST 'https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false' \
+    --header 'Tenant-Id: ${{ inputs.tenant_id }}' \
+    --header 'Authorization: Bearer ${{ inputs.token }}' \
+    --form 'file=@"./results.json"'
+  shell: bash
 
