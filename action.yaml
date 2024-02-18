@@ -50,7 +50,7 @@ branding:
 
   
 runs:
-  using: 'docker'
+  using: 'composite'
   image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
   args:
     - ${{ inputs.file }}
@@ -61,4 +61,4 @@ runs:
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
     - ${{ inputs.skip_framework }}
-    - && echo "hello"
+  
