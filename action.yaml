@@ -54,7 +54,6 @@ branding:
   
 runs:
   using: 'composite'
-  image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
   steps:
     - name: Run Checkov Docker container
       uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
