@@ -52,7 +52,7 @@ branding:
 runs:
   using: 'docker'
   steps: 
-    - name: RUN SCAN
+   - name: RUN SCAN
      image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
      args:
        - ${{ inputs.file }}
@@ -63,5 +63,5 @@ runs:
        - ${{ inputs.soft_fail }}
        - ${{ inputs.framework }}
        - ${{ inputs.skip_framework }}
-
+     shell: bash
 
