@@ -53,11 +53,9 @@ branding:
 
   
 runs:
-  using: 'composite'
+  using: 'docker'
+  image: 'ubuntu'
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@main
-      
     - name: Run Checkov Docker container
       uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
       with:
