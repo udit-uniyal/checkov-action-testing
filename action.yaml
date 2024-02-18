@@ -52,17 +52,20 @@ branding:
 runs:
   using: 'docker'
   image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
-  steps:
-    - name: Run IaC Scan
-      id: udit
-      run: |
-        docker run ghcr.io/bridgecrewio/checkov:3.2.21 \
-        checkov \
-        --directory ${{ inputs.directory }} \
-        --compact ${{ inputs.compact }} \
-        --quiet ${{ inputs.quiet }} \
-        --output ${{ inputs.output_format }} \
-        --soft-fail ${{ inputs.soft_fail }} \
-        --framework ${{ inputs.framework }} \
-        --skip-framework ${{ inputs.skip_framework }}
-      shell: bash  
+  args: 
+    - ${{ inputs.file }}
+    - ${{ inputs.directory }}
+    - ${{ inputs.check }}
+    - ${{ inputs.skip_check }}
+    - ${{ inputs.compact }}
+    - ${{ inputs.quiet }}
+    - ${{ inputs.output_format }}
+    - ${{ inputs.soft_fail }}
+    - ${{ inputs.framework }}
+    - ${{ inputs.skip_framework }}
+    - ${{ inputs.external_checks_dirs }}
+    - ${{ inputs.external_checks_repos }}
+    - ${{ inputs.download_external_modules }}
+    - ${{ inputs.enable_secrets_scan_all_files }}   
+
+
