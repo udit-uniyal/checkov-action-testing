@@ -56,9 +56,7 @@ runs:
   using: 'composite'
   steps:
     - name: Run Checkov Docker container
-      run: |
-        pip install checkov
-      # uses: docker://ghcr.io/bridgecrewio/checkov:latest
+      uses: docker://ghcr.io/bridgecrewio/checkov:latest
       with:
         args: ${{ inputs.file }} ${{ inputs.directory }} ${{ inputs.compact }} ${{ inputs.quiet }} ${{ inputs.output_format }} ${{ inputs.soft_fail }} ${{ inputs.framework }} ${{ inputs.skip_framework }} ${{ inputs.enable_secrets_scan_all_files }} ${{ inputs.output_file_path }}
       env:
