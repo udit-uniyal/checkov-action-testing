@@ -53,8 +53,9 @@ runs:
   using: 'composite'
   steps:
     - name: Run IaC Scan
-      image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
-      args:
+      run: |
+        docker run docker://ghcr.io/bridgecrewio/checkov:3.2.21
+      with:
         - ${{ inputs.file }}
         - ${{ inputs.directory }}
         - ${{ inputs.compact }}
@@ -63,4 +64,4 @@ runs:
         - ${{ inputs.soft_fail }}
         - ${{ inputs.framework }}
         - ${{ inputs.skip_framework }}
-  
+      shell: bash  
