@@ -58,7 +58,7 @@ jobs:
 
       - name: Run Scan
         run: |
-          docker run ghcr.io/bridgecrewio/checkov:3.2.21 ${{ inputs.file }} ${{ inputs.directory }} ${{ inputs.compact }} ${{ inputs.quiet }} ${{ inputs.output_format }} ${{ inputs.soft_fail }} ${{ inputs.framework }} ${{ inputs.skip_framework }}
+          docker run ghcr.io/bridgecrewio/checkov:3.2.21 ${{ github.event.inputs.file }} ${{ inputs.directory }} ${{ inputs.compact }} ${{ inputs.quiet }} ${{ inputs.output_format }} ${{ inputs.soft_fail }} ${{ inputs.framework }} ${{ inputs.skip_framework }}
         shell: bash
       - name: Push report to CSPM panel
         run: |
