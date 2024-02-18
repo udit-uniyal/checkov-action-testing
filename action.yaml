@@ -18,6 +18,9 @@ inputs:
     description: 'The format of the output. cli, json, junitxml, github_failed_only, or sarif (comma separated)'
     required: false
     default: 'json'
+  output_file_path:
+    description: 'Path and name for output file, needs to end with a comma for a single output format'
+    required: false
   soft_fail:
     description: 'do not return an error code if there are failed checks'
     required: false
@@ -61,7 +64,8 @@ runs:
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
     - ${{ inputs.skip_framework }}
-    - ${{ inputs.enable_secrets_scan_all_files }}   
+    - ${{ inputs.enable_secrets_scan_all_files }}
+    - ${{ inputs.output_file_path }}
   env:
     GITHUB_PAT: ${{ inputs.github_pat }}
 
