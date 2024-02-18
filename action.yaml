@@ -49,6 +49,19 @@ branding:
   color: 'purple'
 
   
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
+  args:
+    - ${{ inputs.file }}
+    - ${{ inputs.directory }}
+    - ${{ inputs.compact }}
+    - ${{ inputs.quiet }}
+    - ${{ inputs.output_format }}
+    - ${{ inputs.soft_fail }}
+    - ${{ inputs.framework }}
+    - ${{ inputs.skip_framework }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -57,9 +70,19 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Run Scan
-        run: |
-          docker run ghcr.io/bridgecrewio/checkov:3.2.21 ${{ github.event.inputs.file }} ${{ inputs.directory }} ${{ inputs.compact }} ${{ inputs.quiet }} ${{ inputs.output_format }} ${{ inputs.soft_fail }} ${{ inputs.framework }} ${{ inputs.skip_framework }}
-        shell: bash
+        uses: ./
+        with:
+          file: ${{ inputs.file }}
+          directory: ${{ inputs.directory }}
+          compact: ${{ inputs.compact }}
+          quiet: ${{ inputs.quiet }}
+          output_format: ${{ inputs.output_format }}
+          soft_fail: ${{ inputs.soft_fail }}
+          framework: ${{ inputs.framework }}
+          skip_framework: ${{ inputs.skip_framework }}
+          github_pat: ${{ inputs.github_pat }}
+          enable_secrets_scan_all_files: ${{ inputs.enable_secrets_scan_all_files }}
+
       - name: Push report to CSPM panel
         run: |
           curl --location --request POST "https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
