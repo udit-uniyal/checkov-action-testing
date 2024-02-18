@@ -62,5 +62,6 @@ runs:
     - ${{ inputs.framework }}
     - ${{ inputs.skip_framework }}
     - ${{ inputs.enable_secrets_scan_all_files }}   
- shell: bash
+  env:
+    GITHUB_PAT: ${{ inputs.github_pat }}
 
