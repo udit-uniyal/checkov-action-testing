@@ -65,7 +65,7 @@ runs:
 steps:
   - name: Push report to CSPM panel
     run: |
-      curl --location --request POST "https:/dfdf}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
-      --header "Tenant-Id: ${{ inputs.tenant_id }}" \
-      --header "Authorization: Bearer ${{ inputs.token }}" \
+      curl --location --request POST "https:/dfdf}/api/v1/artifact/?tenant_id=hkhkhjkh&data_type=TR&save_to_s3=false" \
+      --header "Tenant-Id: dfsdfdf}" \
+      --header "Authorization: Bearer " \
       --form "file=@./results.json"
