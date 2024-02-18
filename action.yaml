@@ -51,14 +51,15 @@ branding:
   
 runs:
   using: 'composite'
-  image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
-  args:
-    - ${{ inputs.file }}
-    - ${{ inputs.directory }}
-    - ${{ inputs.compact }}
-    - ${{ inputs.quiet }}
-    - ${{ inputs.output_format }}
-    - ${{ inputs.soft_fail }}
-    - ${{ inputs.framework }}
-    - ${{ inputs.skip_framework }}
+  steps:
+    image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
+    args:
+      - ${{ inputs.file }}
+      - ${{ inputs.directory }}
+      - ${{ inputs.compact }}
+      - ${{ inputs.quiet }}
+      - ${{ inputs.output_format }}
+      - ${{ inputs.soft_fail }}
+      - ${{ inputs.framework }}
+      - ${{ inputs.skip_framework }}
   
