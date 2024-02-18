@@ -69,7 +69,6 @@ runs:
   env:
     GITHUB_PAT: ${{ inputs.github_pat }}
 
-runs:
   using: 'composite'
   steps: 
     - name: Push report to CSPM panel
