@@ -58,7 +58,17 @@ runs:
     - name: Run Checkov Docker container
       uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
       with:
-        args: ${{ inputs.file }} ${{ inputs.directory }} ${{ inputs.compact }} ${{ inputs.quiet }} ${{ inputs.output_format }} ${{ inputs.soft_fail }} ${{ inputs.framework }} ${{ inputs.skip_framework }} ${{ inputs.enable_secrets_scan_all_files }} ${{ inputs.output_file_path }}
+        args: 
+          - ${{ inputs.file }}
+          - ${{ inputs.directory }}
+          - ${{ inputs.compact }}
+          - ${{ inputs.quiet }}
+          - ${{ inputs.output_format }}
+          - ${{ inputs.soft_fail }}
+          - ${{ inputs.framework }}
+          - ${{ inputs.skip_framework }}
+          - ${{ inputs.enable_secrets_scan_all_files }}
+          - ${{ inputs.output_file_path }}
       env:
         GITHUB_PAT: ${{ inputs.github_pat }}
     - name: Push report to CSPM panel
