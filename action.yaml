@@ -54,7 +54,7 @@ runs:
   steps:
     - name: Run IaC Scan
       run: |
-        docker run docker://ghcr.io/bridgecrewio/checkov:3.2.21 \
+        docker run ghcr.io/bridgecrewio/checkov:3.2.21 \
         ${{ inputs.file }} \
         ${{ inputs.directory }} \
         ${{ inputs.compact }} \
