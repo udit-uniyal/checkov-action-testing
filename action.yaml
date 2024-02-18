@@ -52,14 +52,15 @@ branding:
 runs:
   using: 'composite'
   steps:
-    image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
-    args:
-      - ${{ inputs.file }}
-      - ${{ inputs.directory }}
-      - ${{ inputs.compact }}
-      - ${{ inputs.quiet }}
-      - ${{ inputs.output_format }}
-      - ${{ inputs.soft_fail }}
-      - ${{ inputs.framework }}
-      - ${{ inputs.skip_framework }}
+    - name: Run IaC Scan
+      image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
+      args:
+        - ${{ inputs.file }}
+        - ${{ inputs.directory }}
+        - ${{ inputs.compact }}
+        - ${{ inputs.quiet }}
+        - ${{ inputs.output_format }}
+        - ${{ inputs.soft_fail }}
+        - ${{ inputs.framework }}
+        - ${{ inputs.skip_framework }}
   
