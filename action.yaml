@@ -64,3 +64,4 @@ runs:
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
     - ${{ inputs.skip_framework }}
+    - ${{ inputs.output_file_path }}
