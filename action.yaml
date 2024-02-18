@@ -51,29 +51,17 @@ branding:
   
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
-  args:
-    - ${{ inputs.file }}
-    - ${{ inputs.directory }}
-    - ${{ inputs.compact }}
-    - ${{ inputs.quiet }}
-    - ${{ inputs.output_format }}
-    - ${{ inputs.soft_fail }}
-    - ${{ inputs.framework }}
-    - ${{ inputs.skip_framework }}
+  steps: 
+    - name: RUN SCAN
+     image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
+     args:
+       - ${{ inputs.file }}
+       - ${{ inputs.directory }}
+       - ${{ inputs.compact }}
+       - ${{ inputs.quiet }}
+       - ${{ inputs.output_format }}
+       - ${{ inputs.soft_fail }}
+       - ${{ inputs.framework }}
+       - ${{ inputs.skip_framework }}
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-
-      - name: Push report to CSPM panel
-        run: |
-          curl --location --request POST "https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
-          --header "Tenant-Id: ${{ inputs.tenant_id }}" \
-          --header "Authorization: Bearer ${{ inputs.token }}" \
-          --form "file=@./results.json"
-        shell: bash
 
