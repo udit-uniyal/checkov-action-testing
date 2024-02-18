@@ -51,6 +51,7 @@ branding:
   
 runs:
   using: 'docker'
+  image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
   steps:
     - name: Run IaC Scan
       id: udit
