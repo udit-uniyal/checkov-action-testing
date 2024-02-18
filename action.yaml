@@ -55,6 +55,8 @@ branding:
 runs:
   using: 'composite'
   steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
     - name: Run Checkov Docker container
       uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
       with:
