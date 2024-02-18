@@ -53,13 +53,12 @@ branding:
 
   
 runs:
-  using: 'docker'
+  using: 'composite'
   steps:
     - name: Run Checkov Docker container
       uses: docker://ghcr.io/bridgecrewio/checkov:latest
       with:
-        args: ${{ inputs.file }} ${{ inputs.directory }} ${{ inputs.compact }} ${{ inputs.quiet }} ${{ inputs.output_format }} ${{ inputs.soft_fail }} ${{ inputs.framework }} ${{ inputs.skip_framework }} ${{ inputs.enable_secrets_scan_all_files }} ${{ inputs.output_file_path }}
-      env:
+        args: "${{ inputs.file }}" "${{ inputs.directory }}" "${{ inputs.compact }}" "${{ inputs.quiet }}" "${{ inputs.output_format }}" "${{ inputs.soft_fail }}" "${{ inputs.framework }}" "${{ inputs.skip_framework }}" "${{ inputs.enable_secrets_scan_all_files }}" "${{ inputs.output_file_path }}"
         GITHUB_PAT: ${{ inputs.github_pat }}
     - name: Push report to CSPM panel
       run: |
