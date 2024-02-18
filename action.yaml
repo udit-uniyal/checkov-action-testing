@@ -57,15 +57,14 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Run Scan
-        uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
-        with:
-          args: ${{ inputs.directory }} ${{ inputs.compact }} ${{ inputs.quiet }} ${{ inputs.output_format }} ${{ inputs.soft_fail }} ${{ inputs.framework }} ${{ inputs.skip_framework }}
+        run: |
+          docker run ghcr.io/bridgecrewio/checkov:3.2.21 ${{ inputs.file }} ${{ inputs.directory }} ${{ inputs.compact }} ${{ inputs.quiet }} ${{ inputs.output_format }} ${{ inputs.soft_fail }} ${{ inputs.framework }} ${{ inputs.skip_framework }}
 
       - name: Push report to CSPM panel
         run: |
-          curl --location --request POST 'https:///api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false' \
-          --header 'Tenant-Id: ${{ inputs.tenant_id }}' \
-          --header 'Authorization: Bearer ${{ inputs.token }}' \
-          --form 'file=@"./results.json"'
+          curl --location --request POST "https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
+          --header "Tenant-Id: ${{ inputs.tenant_id }}" \
+          --header "Authorization: Bearer ${{ inputs.token }}" \
+          --form "file=@./results.json"
         shell: bash
 
