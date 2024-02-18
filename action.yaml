@@ -59,7 +59,8 @@ runs:
       uses: docker://ghcr.io/bridgecrewio/checkov:latest
       with:
         args: "${{ inputs.file }}" "${{ inputs.directory }}" "${{ inputs.compact }}" "${{ inputs.quiet }}" "${{ inputs.output_format }}" "${{ inputs.soft_fail }}" "${{ inputs.framework }}" "${{ inputs.skip_framework }}" "${{ inputs.enable_secrets_scan_all_files }}" "${{ inputs.output_file_path }}"
-        GITHUB_PAT: ${{ inputs.github_pat }}
+      env:   
+       GITHUB_PAT: ${{ inputs.github_pat }}
     - name: Push report to CSPM panel
       run: |
         curl --location --request POST 'https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false' --header 'Tenant-Id: ${{ inputs.tenant_id  }}' --header 'Authorization: Bearer ${{ inputs.token }}' --form 'file=@"./results.json"'
