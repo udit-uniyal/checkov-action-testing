@@ -53,7 +53,8 @@ runs:
   using: 'composite'
   steps:
     - name: RUN SCAN
-      uses: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
+      using: 'docker'
+      image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
       args:
         - ${{ inputs.file }}
         - ${{ inputs.directory }}
