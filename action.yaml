@@ -61,8 +61,6 @@ runs:
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
     - ${{ inputs.skip_framework }}
-
-  using: 'composite'
   steps: 
     - name: Push report to CSPM panel
       run: |
