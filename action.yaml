@@ -69,9 +69,16 @@ branding:
 runs:
   using: 'composite'
   steps:
+    - name: Debugging Info
+      run: |
+        ls -al
+        pwd
+        echo "File exists: $(ls -al ${GITHUB_WORKSPACE}/${{ inputs.file }})"
     - name: Run IaC Scan
       run: |
-        docker run \
+        docker run --rm \
+          -v "${GITHUB_WORKSPACE}:/workdir" \
+          -w "/workdir" \
           ghcr.io/bridgecrewio/checkov:3.2.21 \
           checkov \
           ${{ inputs.file }} \
@@ -91,3 +98,4 @@ runs:
           --header "Authorization: Bearer ${{ inputs.token }}" \
           --form "file=@${{ inputs.output_file_path }}"
       shell: bash
+
