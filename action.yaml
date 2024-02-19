@@ -77,7 +77,7 @@ runs:
       shell: bash
     - name: Run IaC Scan
       run: |
-        docker run --rm -v "${GITHUB_WORKSPACE}:/workdir" -w "/workdir" ghcr.io/bridgecrewio/checkov:3.2.21 checkov \
+        docker run ghcr.io/bridgecrewio/checkov:3.2.21 checkov 
         ${{ inputs.file }} \
         ${{ inputs.directory }} \
         ${{ inputs.compact }} \
@@ -86,7 +86,6 @@ runs:
         ${{ inputs.soft_fail }} \
         ${{ inputs.framework }} \
         ${{ inputs.skip_framework }} \
-        > "${{ inputs.output_file_path }}"
       shell: bash
     - name: Push report to CSPM panel
       run: |
