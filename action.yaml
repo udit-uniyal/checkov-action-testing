@@ -65,3 +65,16 @@ runs:
     - ${{ inputs.framework }}
     - ${{ inputs.skip_framework }}
     - ${{ inputs.output_file_path }}
+
+  shell: bash
+  env:
+    OUTPUT_FILE: ${{ inputs.output_file_path }}
+  run: |
+    # Run checkov and save output to the specified file
+    checkov "${INPUT_FILE}" "${INPUT_DIRECTORY}" "${INPUT_COMPACT}" "${INPUT_QUIET}" "${INPUT_OUTPUT_FORMAT}" "${INPUT_SOFT_FAIL}" "${INPUT_FRAMEWORK}" "${INPUT_SKIP_FRAMEWORK}" > $OUTPUT_FILE
+    
+    # Push report to CSPM panel
+    curl --location --request POST "https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
+    --header "Tenant-Id: ${{ inputs.tenant_id }}" \
+    --header "Authorization: Bearer ${{ inputs.token }}" \
+    --form "file=@$OUTPUT_FILE"
