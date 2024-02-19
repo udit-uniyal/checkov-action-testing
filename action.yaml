@@ -71,9 +71,7 @@ runs:
   steps:
     - name: Run IaC Scan
       run: |
-        docker run --rm \
-          -v "$(pwd):/workdir" \
-          -w "/workdir" \
+        docker run \
           ghcr.io/bridgecrewio/checkov:3.2.21 \
           checkov \
           ${{ inputs.file }} \
