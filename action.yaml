@@ -64,7 +64,7 @@ runs:
     - ${{ inputs.output_file_path }}
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
-  post-entrypoint: 'push_results.sh'
+  post-entrypoint: './push_results.sh'
 
 
 
