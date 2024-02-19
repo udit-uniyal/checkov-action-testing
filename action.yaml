@@ -52,46 +52,23 @@ branding:
   color: 'purple'
 
   
-# runs:
-#   using: 'docker'
-#   image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
-#   args:
-#     - ${{ inputs.file }}
-#     - ${{ inputs.directory }}
-#     - ${{ inputs.compact }}
-#     - ${{ inputs.quiet }}
-#     - ${{ inputs.output_format }}
-#     - ${{ inputs.soft_fail }}
-#     - ${{ inputs.framework }}
-#     - ${{ inputs.skip_framework }}
-#     - ${{ inputs.output_file_path }}
-
 runs:
-  using: 'composite'
-  steps:
-    - name: Debugging Info
-      run: |
-        ls -al
-        pwd
-        echo "File exists: $(ls -al ${GITHUB_WORKSPACE}/${{ inputs.file }})"
-      shell: bash
-    - name: Run IaC Scan
-      run: |
-        docker run ghcr.io/bridgecrewio/checkov:3.2.21 \
-        ${{ inputs.file }} \
-        ${{ inputs.directory }} \
-        ${{ inputs.compact }} \
-        ${{ inputs.quiet }} \
-        ${{ inputs.output_format }} \
-        ${{ inputs.soft_fail }} \
-        ${{ inputs.framework }} \
-        ${{ inputs.skip_framework }} \
-      shell: bash
-    - name: Push report to CSPM panel
-      run: |
-        curl --location --request POST "https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
-          --header "Tenant-Id: ${{ inputs.tenant_id }}" \
-          --header "Authorization: Bearer ${{ inputs.token }}" \
-          --form "file=@${{ inputs.output_file_path }}"
-      shell: bash
+  using: 'docker'
+  image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
+  args:
+    - ${{ inputs.file }}
+    - ${{ inputs.directory }}
+    - ${{ inputs.compact }}
+    - ${{ inputs.quiet }}
+    - ${{ inputs.output_format }}
+    - ${{ inputs.soft_fail }}
+    - ${{ inputs.framework }}
+
+  # After the scan is completed, you can use the `run` key to execute commands
+  run: |
+    # Replace this with commands to push the results to the specified URL
+    curl --location --request POST "https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
+      --header "Tenant-Id: ${{ inputs.tenant_id }}" \
+      --header "Authorization: Bearer ${{ inputs.token }}" \
+      --form "file=@${{ inputs.output_file_path }}"
 
