@@ -70,7 +70,6 @@ branding:
 runs:
   using: 'docker'
   image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
-  entrypoint: ['/bin/sh', '-c']
   args:
     - |
       checkov \
