@@ -65,12 +65,26 @@ runs:
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
 
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
+  args:
+    - ${{ inputs.file }}
+    - ${{ inputs.directory }}
+    - ${{ inputs.compact }}
+    - ${{ inputs.quiet }}
+    - ${{ inputs.output_format }}
+    - ${{ inputs.output_file_path }}
+    - ${{ inputs.soft_fail }}
+    - ${{ inputs.framework }}
+
 steps:
-  - name: Push report
+  # After the scan is completed, you can use the `run` key to execute commands
+  - name: Push report to CSPM panel
     run: |
-    # Replace this with commands to push the results to the specified URL
+      # Replace this with commands to push the results to the specified URL
       curl --location --request POST "https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
-      --header "Tenant-Id: ${{ inputs.tenant_id }}" \
-      --header "Authorization: Bearer ${{ inputs.token }}" \
-      --form "file=@${{ inputs.output_file_path }}"
+        --header "Tenant-Id: ${{ inputs.tenant_id }}" \
+        --header "Authorization: Bearer ${{ inputs.token }}" \
+        --form "file=@${{ inputs.output_file_path }}"
 
