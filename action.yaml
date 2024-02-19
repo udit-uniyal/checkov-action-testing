@@ -85,9 +85,11 @@ runs:
           ${{ inputs.framework }} \
           ${{ inputs.skip_framework }} \
           > "${{ inputs.output_file_path }}"
+      shell: bash
     - name: Push report to CSPM panel
       run: |
         curl --location --request POST "https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
           --header "Tenant-Id: ${{ inputs.tenant_id }}" \
           --header "Authorization: Bearer ${{ inputs.token }}" \
           --form "file=@${{ inputs.output_file_path }}"
+      shell: bash
