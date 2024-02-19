@@ -79,9 +79,9 @@ runs:
   using: 'composite'
   steps: 
     - name: Run IaC Scan
-      uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
+      uses: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
       with:
-        args: 
+        args: >
           ${{ inputs.file }}
           ${{ inputs.directory }}
           ${{ inputs.compact }}
