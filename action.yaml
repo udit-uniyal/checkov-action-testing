@@ -61,6 +61,7 @@ runs:
     - ${{ inputs.compact }}
     - ${{ inputs.quiet }}
     - ${{ inputs.output_format }}
+    - ${{ inputs.output_file_path }}
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
 
