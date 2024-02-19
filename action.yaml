@@ -74,6 +74,7 @@ runs:
         ls -al
         pwd
         echo "File exists: $(ls -al ${GITHUB_WORKSPACE}/${{ inputs.file }})"
+      shell: bash
     - name: Run IaC Scan
       run: |
         docker run --rm \
