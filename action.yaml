@@ -78,10 +78,12 @@ runs:
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
 
-  steps:
-  # After the scan is completed, you can use the `run` key to execute commands
-     - name: Push report to CSPM panel
-       run: |
-         curl --location --request POST 'https:///api/v1/artifact/?tenant_id=&data_type=TR&save_to_s3=false' --header 'Tenant-Id: ' --header 'Authorization: Bearer ' --form 'file=@"./results.json"'
-       shell: bash
+steps:
+  - name: Push report to CSPM panel
+    run: |
+      curl --location --request POST "https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
+        --header "Tenant-Id: ${{ inputs.tenant_id }}" \
+        --header "Authorization: Bearer ${{ inputs.token }}" \
+        --form "file=@${{ inputs.output_file_path }}"
+    shell: bash
 
