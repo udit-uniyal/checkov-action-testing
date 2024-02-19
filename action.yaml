@@ -81,12 +81,12 @@ runs:
     - name: Run IaC Scan
       uses: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
       with:
-        args: >
-          ${{ inputs.file }}
-          ${{ inputs.directory }}
-          ${{ inputs.compact }}
-          ${{ inputs.quiet }}
-          ${{ inputs.output_format }}
-          ${{ inputs.output_file_path }}
-          ${{ inputs.soft_fail }}
-          ${{ inputs.framework }}
+        args: ${{ inputs.directory }}
+          # ${{ inputs.file }}
+          # ${{ inputs.directory }}
+          # ${{ inputs.compact }}
+          # ${{ inputs.quiet }}
+          # ${{ inputs.output_format }}
+          # ${{ inputs.output_file_path }}
+          # ${{ inputs.soft_fail }}
+          # ${{ inputs.framework }}
