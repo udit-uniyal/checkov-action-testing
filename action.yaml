@@ -64,8 +64,9 @@ runs:
     - ${{ inputs.output_file_path }}
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
-    env:
-      GITHUB_PAT: ${{ inputs.github_pat }}
+    - "&& echo hello world"
+  env:
+    GITHUB_PAT: ${{ inputs.github_pat }}
 
 # steps:
 #   # After the scan is completed, you can use the `run` key to execute commands
