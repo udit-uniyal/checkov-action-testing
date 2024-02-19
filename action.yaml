@@ -64,7 +64,6 @@ runs:
     - ${{ inputs.output_file_path }}
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
-    - "&& echo hello "
     env:
       GITHUB_PAT: ${{ inputs.github_pat }}
 
