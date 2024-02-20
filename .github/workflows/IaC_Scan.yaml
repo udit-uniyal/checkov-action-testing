@@ -22,7 +22,7 @@ jobs:
           # file: 'example.tf'               # Provide the path to the file you want to scan
           directory: ./  # Provide the directory where your infrastructure code is located
           # compact: 'true'                 # Do not display code blocks in output
-          # quiet: 'true'                   # Display only failed checks
+          quiet: 'true'                   # Display only failed checks
           output_format: json
           output_file_path: console,results.json
           # framework: 'terraform'                # Run only on a specific infrastructure
