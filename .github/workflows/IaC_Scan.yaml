@@ -25,11 +25,10 @@ jobs:
           directory: ./  # Provide the directory where your infrastructure code is located
           # compact: 'true'                 # Do not display code blocks in output
           quiet: 'true'                   # Display only failed checks
-          # output_format: json
           output_file_path: ./results.json
           # framework: 'terraform'                # Run only on a specific infrastructure
           # skip_framework: 'dockerfile'         # Skip a specific infrastructure
-          soft_fail: 'true'              # Do not return an error code if there are failed checks
+          # soft_fail: 'true'              # Do not return an error code if there are failed checks
           # github_pat: ${{ secrets.GITHUB_TOKEN }}  # GitHub personal access token for accessing private repositories
           # enable_secrets_scan_all_files: 'true'  # Scan all files for secrets
 
