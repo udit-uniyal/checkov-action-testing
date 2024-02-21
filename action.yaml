@@ -51,23 +51,21 @@ branding:
   icon: 'shield'
   color: 'purple'
 
-runs:
-  using: 'composite'
-  steps:
+
     - name: Run Checkov IaC Scan
-      run: |
-        docker run --rm \
-          -v ${{ github.workspace }}:/workspace \
-          ghcr.io/bridgecrewio/checkov:3.2.21 \
-          checkov \
-          ${{ inputs.file and '-f ' + inputs.file }} \
-          ${{ inputs.directory and '-d ' + inputs.directory }} \
-          ${{ inputs.compact and '--compact' }} \
-          ${{ inputs.quiet == 'true' and '--quiet' }} \
-          ${{ inputs.output_format and '-o ' + inputs.output_format }} \
-          ${{ inputs.output_file_path and '-o ' + inputs.output_file_path }} \
-          ${{ inputs.soft_fail and '--soft-fail' }} \
-          ${{ inputs.framework and '--framework ' + inputs.framework }}
+      uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
+      with:
+        args: |
+          -f ${{ inputs.file }}
+          -d ${{ inputs.directory }}
+          ${{ inputs.compact }}
+          ${{ inputs.quiet }}
+          ${{ inputs.output_format }}
+          ${{ inputs.output_file_path }}
+          ${{ inputs.soft_fail }}
+          ${{ inputs.framework }}
+      env:
+        GITHUB_PAT: ${{ inputs.github_pat }}
       env:
       env:
         GITHUB_PAT: ${{ inputs.github_pat }}
