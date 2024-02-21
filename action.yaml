@@ -70,7 +70,7 @@ runs:
   using: 'composite'
   steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@main
 
     - name: Run Checkov IaC Scan
       uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
