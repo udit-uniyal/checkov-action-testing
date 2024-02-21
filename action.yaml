@@ -75,7 +75,8 @@ runs:
           INPUT_OUTPUT_FILE_PATH: ${{ inputs.output_file_path }}
           INPUT_SOFT_FAIL: ${{ inputs.soft_fail }}
           INPUT_FRAMEWORK: ${{ inputs.framework }}
-
+          
+      - name: Send Result to AccuKnox SaaS
 
 
 
