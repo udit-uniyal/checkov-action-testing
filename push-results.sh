@@ -1,1 +1,1 @@
-curl --location --request POST 'https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=IAC&save_to_s3=false' --header 'Tenant-Id:${{inputs.tenant_id}}' --header 'Authorization:Bearer ${{inputs.token}}' --form 'file=@"./results.json"'
+curl --location --request POST 'https://${{ env.endpoint }}/api/v1/artifact/?tenant_id=${{ env.tenant_id }}&data_type=IAC&save_to_s3=false' --header 'Tenant-Id:${{env.tenant_id}}' --header 'Authorization:Bearer ${{env.token}}' --form 'file=@"./results.json"'
