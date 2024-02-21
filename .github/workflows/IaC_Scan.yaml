@@ -18,16 +18,10 @@ jobs:
       - name: Run IaC scan
         uses: ./
         with:
-          # file: 'example.tf'               # Provide the path to the file you want to scan
-          directory: ./  # Provide the directory where your infrastructure code is located
-          # compact: 'true'                 # Do not display code blocks in output
-          quiet: 'true'                   # Display only failed checks
+          directory: ./ 
+          quiet: 'true'                 
           output_file_path: ./results.json
-          # framework: 'terraform'                # Run only on a specific infrastructure
-          # skip_framework: 'dockerfile'         # Skip a specific infrastructure
-          soft_fail: 'true'              # Do not return an error code if there are failed checks
-          # github_pat: ${{ secrets.GITHUB_TOKEN }}  # GitHub personal access token for accessing private repositories
-          # enable_secrets_scan_all_files: 'true'  # Scan all files for secrets
+          soft_fail: 'true'              
           token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzExMTA3NzE3LCJqdGkiOiIxZDNlZTkxOTFiYzY0NGUzOWZmYThhNWNkMDVjNDg3NyIsImlzcyI6ImNzcG0uZGV2LmFjY3Vrbm94LmNvbSJ9.MvxzqTo5lNvg6kdPnIeD2npxtSyd0pZhhwuaxg9XE6o71gy0kIzAiCoYHRXcZamn0YONuDRcqdwHqy4AuFtTOMUlShpq6e9VgbMvRb3meZagw2pHUO7N9AXpD34OZQcX8gtbhBYBttBoAo6ZpTZwgSfc9G7XKa5S8ArMFL2EdzQYGexDeVx4YZDPeGAycAvQTNmeweoraUjBbN9E04nm0t0nyqBmgpoju2hE70hQEYhoWuC0i7LECcvQVm-5qrB30hjySsTk_9hTpnY5YVOd_ncz7FFt_wCv7T9pp2nnOFfq8YviXYSTg1PxO1fFJ3a13bXLDTtD9Zsa70iTzFeBBw"
           endpoint: "cspm.dev.accuknox.com"
           tenant_id: "1069"
@@ -39,4 +33,4 @@ jobs:
       
         
         
-  # framework: ansible, argo_workflows, arm, azure_pipelines, bicep, bitbucket_pipelines, cdk, circleci_pipelines, cloudformation, dockerfile, github_configuration, github_actions, gitlab_configuration, gitlab_ci, bitbucket_configuration, helm, json, yaml, kubernetes, kustomize, openapi, sca_package, sca_image, secrets, serverless, terraform, terraform_json, terraform_plan, sast, sast_python, sast_java, sast_javascript, 3d_policy.
+ 
