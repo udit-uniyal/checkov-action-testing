@@ -67,9 +67,8 @@ runs:
           ${{ inputs.output_file_path }}
           ${{ inputs.soft_fail }}
           ${{ inputs.framework }}
-        env:
-          GITHUB_PAT: ${{ inputs.github_pat }}
-     shell: bash
+      shell: bash
+
 
 
 
