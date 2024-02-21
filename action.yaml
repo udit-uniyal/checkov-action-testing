@@ -80,7 +80,7 @@ runs:
           
       - name: Formating the results  
         run: |
-          || true 
+          sudo apt-get install jq
           jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' ./results.json > ./results_tmp.json && mv ./results_tmp.json ./results.json
 
         shell: bash
