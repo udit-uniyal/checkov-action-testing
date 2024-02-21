@@ -52,7 +52,7 @@ branding:
   color: 'purple'
 
 runs:
-  using: 'composite'
+  using: 'ubuntu'
   steps: 
       - name: Run Checkov IaC Scan
         uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
