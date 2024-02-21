@@ -25,7 +25,7 @@ jobs:
           directory: ./  # Provide the directory where your infrastructure code is located
           # compact: 'true'                 # Do not display code blocks in output
           quiet: 'true'                   # Display only failed checks
-          output_format: json
+          # output_format: json
           output_file_path: ./results.json
           # framework: 'terraform'                # Run only on a specific infrastructure
           # skip_framework: 'dockerfile'         # Skip a specific infrastructure
