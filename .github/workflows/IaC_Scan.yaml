@@ -40,10 +40,23 @@ jobs:
 
       - name: Pushing Results
         run: |
-          curl --location --request POST 'https://${{env.endpoint}}/api/v1/artifact/?tenant_id=${{ env.tenant_id }}&data_type=IAC&save_to_s3=false' --header 'Tenant-Id: ${{ env.tenant_id }}' --header 'Authorization: Bearer ${{ env.token }}' --form file=@${{ env.IAC_SCAN_RESULTS }}          
-
-      # - name: Pushing Results
-      #   run: |
+          # Check if results.json file exists
+          if [ -f "${{ github.workspace }}/results.json" ]; then
+            # Print the content of results.json for debugging
+            cat "${{ github.workspace }}/results.json"
+            # Use curl to send the file to the specified endpoint
+            curl --location --request POST "https://${{ env.endpoint }}/api/v1/artifact/?tenant_id=${{ env.tenant_id }}&data_type=IAC&save_to_s3=false" \
+                 --header "Tenant-Id: ${{ env.tenant_id }}" \
+                 --header "Authorization: Bearer ${{ env.token }}" \
+                 --form "file=@${{ github.workspace }}/results.json"
+          else
+            echo "results.json file not found!"
+            exit 1
+          fi
+        env:
+          endpoint: ${{ env.endpoint }}
+          tenant_id: ${{ env.tenant_id }}
+          token: ${{ env.token }} # Assuming you have the auth token stored in GitHub secrets
       #     curl --location --request POST 'https://${{env.endpoint}}/api/v1/artifact/?tenant_id=${{ env.tenant_id }}&data_type=IAC&save_to_s3=false' --header 'Tenant-Id: ${{ env.tenant_id }}' --header 'Authorization: Bearer ${{ env.token }}' --form file=@./results.json
           
         
