@@ -56,16 +56,18 @@ runs:
   using: 'docker'
   image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
   args:
-    - ${{ inputs.file }}
-    - ${{ inputs.directory }}
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
+  args:
+    - /github/workspace/${{ inputs.file }}
+    - /github/workspace/${{ inputs.directory }}
     - ${{ inputs.compact }}
     - ${{ inputs.quiet }}
     - ${{ inputs.output_format }}
-    - ${{ inputs.output_file_path }}
+    - /github/workspace/${{ inputs.output_file_path }}
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
-  volumes:
-    - ${{ github.workspace }}:/github/workspace
   env:
     GITHUB_PAT: ${{ inputs.github_pat }}
 # runs:
