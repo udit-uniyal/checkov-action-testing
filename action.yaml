@@ -54,19 +54,27 @@ branding:
 runs:
   using: 'composite'
   steps: 
-    - name: Run Checkov IaC Scan
-      uses: actions/checkout@main
-      with:
-        image: docker://ghcr.io/bridgecrewio/checkov:3.2.21
-        args: 
-          ${{ inputs.file }}
-          ${{ inputs.directory }}
-          ${{ inputs.compact }}
-          ${{ inputs.quiet }}
-          ${{ inputs.output_format }}
-          ${{ inputs.output_file_path }}
-          ${{ inputs.soft_fail }}
-          ${{ inputs.framework }}
+      - name: Run Checkov IaC Scan
+        uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
+        with:
+          args: |
+            ${INPUT_FILE}
+            ${INPUT_DIRECTORY}
+            ${INPUT_COMPACT}
+            ${INPUT_QUIET}
+            ${INPUT_OUTPUT_FORMAT}
+            ${INPUT_OUTPUT_FILE_PATH}
+            ${INPUT_SOFT_FAIL}
+            ${INPUT_FRAMEWORK}
+        env:
+          INPUT_FILE: ${{ inputs.file }}
+          INPUT_DIRECTORY: ${{ inputs.directory }}
+          INPUT_COMPACT: ${{ inputs.compact }}
+          INPUT_QUIET: ${{ inputs.quiet }}
+          INPUT_OUTPUT_FORMAT: ${{ inputs.output_format }}
+          INPUT_OUTPUT_FILE_PATH: ${{ inputs.output_file_path }}
+          INPUT_SOFT_FAIL: ${{ inputs.soft_fail }}
+          INPUT_FRAMEWORK: ${{ inputs.framework }}
 
 
 
