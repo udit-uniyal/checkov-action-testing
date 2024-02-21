@@ -38,7 +38,7 @@ jobs:
 
       - name: Pushing Results
         run: |
-          curl --location --request POST 'https://${{env.endpoint}}/api/v1/artifact/?tenant_id=${{ env.tenant_id }}&data_type=IAC&save_to_s3=false' --header 'Tenant-Id: ${{ env.tenant_id }}' --header 'Authorization: Bearer ${{ env.token }}' --form 'file=@"./scan_results.json"'
+          curl --location --request POST 'https://${{env.endpoint}}/api/v1/artifact/?tenant_id=${{ env.tenant_id }}&data_type=IAC&save_to_s3=false' --header 'Tenant-Id: ${{ env.tenant_id }}' --header 'Authorization: Bearer ${{ env.token }}' --form 'file=@"./results.json"'
           
         
         
