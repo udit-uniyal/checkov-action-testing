@@ -35,7 +35,7 @@ jobs:
           
       - name: Formating the Results
         run: |
-          jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details":{"repo":$repoLink, "branch":$branch}}]' ./results.json > temp.json && mv temp.json ./results.json    
+          jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo":$repoLink, "branch": $branch}}]' ./results.json > temp.json && mv temp.json ./results.json    
         shell: bash
 
       - name: Pushing Results
@@ -49,3 +49,4 @@ jobs:
         
         
   # framework: ansible, argo_workflows, arm, azure_pipelines, bicep, bitbucket_pipelines, cdk, circleci_pipelines, cloudformation, dockerfile, github_configuration, github_actions, gitlab_configuration, gitlab_ci, bitbucket_configuration, helm, json, yaml, kubernetes, kustomize, openapi, sca_package, sca_image, secrets, serverless, terraform, terraform_json, terraform_plan, sast, sast_python, sast_java, sast_javascript, 3d_policy.
+
