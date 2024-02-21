@@ -78,10 +78,12 @@ runs:
           INPUT_SOFT_FAIL: ${{ inputs.soft_fail }}
           INPUT_FRAMEWORK: ${{ inputs.framework }}
           
+      - name: Print Env details
+        run: echo ${{ github.head_ref }}
+        
       - name: Formating the results  
         run: |
-          sudo apt-get install jq
-          jq --arg repoLink "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" --arg branch "$GITHUB_HEAD_REF" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' ./results.json > ./results_tmp.json && mv ./results_tmp.json ./results.json
+          jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' ./results.json > ./temp.json && mv ./temp.json ./results.json 
 
         shell: bash
       - name: Push report to CSPM panel
