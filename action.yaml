@@ -54,12 +54,7 @@ branding:
 runs:
   using: 'composite'
   steps: 
-      - name: Checkout code
-        uses: actions/checkout@main  
-      - name: Push report to CSPM panel
-        run: |
-          curl --location --request POST 'https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false' --header 'Tenant-Id: ${{ inputs.tenant_id  }}' --header 'Authorization: Bearer ${{ inputs.token }}' --form 'file=@"./results.json"'
-        shell: bash
+
       - name: Run Checkov IaC Scan
         uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
         with:
@@ -82,6 +77,11 @@ runs:
           INPUT_SOFT_FAIL: ${{ inputs.soft_fail }}
           INPUT_FRAMEWORK: ${{ inputs.framework }}
 
-
+      - name: Checkout code
+        uses: actions/checkout@main  
+      - name: Push report to CSPM panel
+        run: |
+          curl --location --request POST 'https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false' --header 'Tenant-Id: ${{ inputs.tenant_id  }}' --header 'Authorization: Bearer ${{ inputs.token }}' --form 'file=@"./results.json"'
+        shell: bash
 
 
