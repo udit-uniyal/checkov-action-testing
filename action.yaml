@@ -59,12 +59,12 @@ runs:
         docker run --rm \
           -v ${{ github.workspace }}:/workspace \
           ghcr.io/bridgecrewio/checkov:3.2.21 \
-          /workspace/${{ inputs.file }} \
-          /workspace/${{ inputs.directory }} \
+          ${{ inputs.file }} \
+          ${{ inputs.directory }} \
           ${{ inputs.compact }} \
           ${{ inputs.quiet }} \
           ${{ inputs.output_format }} \
-          /workspace/${{ inputs.output_file_path }} \
+          ${{ inputs.output_file_path }} \
           ${{ inputs.soft_fail }} \
           ${{ inputs.framework }}
       env:
