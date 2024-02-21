@@ -51,13 +51,15 @@ branding:
   icon: 'shield'
   color: 'purple'
 
-
+runs:
+  using: 'composite'
+  steps: 
     - name: Run Checkov IaC Scan
       uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
       with:
         args: |
-          -f ${{ inputs.file }}
-          -d ${{ inputs.directory }}
+          ${{ inputs.file }}
+          ${{ inputs.directory }}
           ${{ inputs.compact }}
           ${{ inputs.quiet }}
           ${{ inputs.output_format }}
