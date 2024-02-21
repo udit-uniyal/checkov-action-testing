@@ -80,6 +80,7 @@ runs:
         
       - name: Formating the results  
         run: | 
+          curl -o ~/temp.json https://raw.githubusercontent.com/udit-uniyal/checkov-action-testing/main/temp.json
           jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' /home/results.json > /home/results.json
         shell: bash
         
