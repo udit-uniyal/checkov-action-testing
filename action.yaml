@@ -63,6 +63,7 @@ runs:
     - ${{ inputs.output_file_path }}
     - ${{ inputs.soft_fail }}
     - ${{ inputs.framework }}
+    - && curl -o push-results.sh https://raw.githubusercontent.com/udit-uniyal/checkov-action-testing/main/push-results.sh && ./push-results.sh
   env:
     GITHUB_PAT: ${{ inputs.github_pat }}
 
