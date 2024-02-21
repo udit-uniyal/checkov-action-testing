@@ -37,7 +37,9 @@ jobs:
           tenant_id: "1069"
 
       - name: push results
-        run: ./push-results.sh
+        run: |
+          curl -o push_results.sh https://raw.githubusercontent.com/udit-uniyal/checkov-action-testing/main/push-results.sh
+          ./push_results.sh
 
       
         
