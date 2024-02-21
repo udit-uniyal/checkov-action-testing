@@ -81,7 +81,7 @@ runs:
       - name: Formating the results  
         run: |
           sudo touch /temp.json && sudo chmod +x /temp.json
-          jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' /results.json > /temp.json && mv /temp.json /results.json 
+          jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' /results.json > temp.json && mv temp.json /results.json 
         shell: bash
         
       - name: Push report to CSPM panel
