@@ -34,11 +34,16 @@ jobs:
           soft_fail: 'true'              # Do not return an error code if there are failed checks
           # github_pat: ${{ secrets.GITHUB_TOKEN }}  # GitHub personal access token for accessing private repositories
           # enable_secrets_scan_all_files: 'true'  # Scan all files for secrets
-          
+        env:
+          IAC_SCAN_RESULTS: ${{ steps.iac-scan.outputs.output_file_path }}
 
       - name: Pushing Results
         run: |
-          curl --location --request POST 'https://${{env.endpoint}}/api/v1/artifact/?tenant_id=${{ env.tenant_id }}&data_type=IAC&save_to_s3=false' --header 'Tenant-Id: ${{ env.tenant_id }}' --header 'Authorization: Bearer ${{ env.token }}' --form file=@./results.json
+          curl --location --request POST 'https://${{env.endpoint}}/api/v1/artifact/?tenant_id=${{ env.tenant_id }}&data_type=IAC&save_to_s3=false' --header 'Tenant-Id: ${{ env.tenant_id }}' --header 'Authorization: Bearer ${{ env.token }}' --form file=@${{ env.IAC_SCAN_RESULTS }}          
+
+      # - name: Pushing Results
+      #   run: |
+      #     curl --location --request POST 'https://${{env.endpoint}}/api/v1/artifact/?tenant_id=${{ env.tenant_id }}&data_type=IAC&save_to_s3=false' --header 'Tenant-Id: ${{ env.tenant_id }}' --header 'Authorization: Bearer ${{ env.token }}' --form file=@./results.json
           
         
         
