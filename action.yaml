@@ -80,8 +80,7 @@ runs:
         
       - name: Formating the results  
         run: | 
-          ls /home
-          jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' /home/results.json > /home/runneradmin/temp.json && mv /home/temp.json /home/runneradmin/results.json
+          jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' /home/results.json > /home/results.json
         shell: bash
         
       - name: Push report to CSPM panel
