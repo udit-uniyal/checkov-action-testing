@@ -21,6 +21,7 @@ jobs:
         uses: actions/checkout@main
       
       - name: Run IaC scan
+        id: iac-scan
         uses: ./
         with:
           # file: 'example.tf'               # Provide the path to the file you want to scan
