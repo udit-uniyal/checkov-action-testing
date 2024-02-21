@@ -80,7 +80,8 @@ runs:
           
       - name: Formating the results  
         run: |
-          jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' ./results.json | sponge ./results.json
+          jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' ./results.json > ./results_tmp.json && mv ./results_tmp.json ./results.json
+
         shell: bash
       - name: Push report to CSPM panel
         run: |
