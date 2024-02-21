@@ -80,9 +80,8 @@ runs:
         
       - name: Formating the results  
         run: |
-          pwd
-          ls
-          jq --arg repoLink "https://github.com/udit-uniyal/checkov-action-testing/" --arg branch "test" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' /results.json > /temp.json && mv /temp.json /results.json 
+          chmod +x temp.json
+          jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' /results.json > /temp.json && mv /temp.json /results.json 
         shell: bash
         
       - name: Push report to CSPM panel
