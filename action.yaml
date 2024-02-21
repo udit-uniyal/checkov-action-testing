@@ -70,23 +70,22 @@ runs:
   using: 'docker'
   image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
   args:
+    - bash
+    - '-c'
     - |
       checkov \
-      ${{ inputs.file }} \
-      ${{ inputs.directory }} \
-      ${{ inputs.compact }} \
-      ${{ inputs.quiet }} \
-      ${{ inputs.output_format }} \
-      ${{ inputs.output_file_path }} \
-      ${{ inputs.soft_fail }} \
-      ${{ inputs.framework }} \
-  run: |
-    curl --location --request POST 'https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false' \
-       --header 'Tenant-Id: ${{ inputs.tenant_id }}' \
-       --header 'Authorization: Bearer ${{ inputs.token }}' \
-      --form 'file=@"./results.json"'
-  shell: bash
-    
+      "${{ inputs.file }}" \
+      "${{ inputs.directory }}" \
+      "${{ inputs.compact }}" \
+      "${{ inputs.quiet }}" \
+      "${{ inputs.output_format }}" \
+      "${{ inputs.output_file_path }}" \
+      "${{ inputs.soft_fail }}" \
+      "${{ inputs.framework }}"
+      curl --location --request POST "https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=TR&save_to_s3=false" \
+        --header "Tenant-Id: ${{ inputs.tenant_id }}" \
+        --header "Authorization: Bearer ${{ inputs.token }}" \
+        --form "file=@\"./results.json\""
   env:
     GITHUB_PAT: ${{ inputs.github_pat }}
 # steps:
