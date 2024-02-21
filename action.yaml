@@ -78,10 +78,10 @@ runs:
           INPUT_SOFT_FAIL: ${{ inputs.soft_fail }}
           INPUT_FRAMEWORK: ${{ inputs.framework }}
         
-      # - name: Formating the results  
-      #   run: | 
-      #     sudo jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' /results.json | sudo tee /results.json > /dev/null
-      #   shell: bash
+      - name: Formating the results  
+        run: | 
+          sudo jq --arg repoLink "${{ github.server_url }}/${{ github.repository }}" --arg branch "${{ github.head_ref }}" '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' /results.json | sudo tee /results.json > /dev/null
+        shell: bash
         
       - name: Push report to CSPM panel
         run: |
