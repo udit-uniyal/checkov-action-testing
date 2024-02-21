@@ -77,7 +77,7 @@ runs:
           INPUT_FRAMEWORK: ${{ inputs.framework }}
           
       - name: Send Result to AccuKnox SaaS
-
+        run: curl --location --request POST 'https://${{ inputs.endpoint }}/api/v1/artifact/?tenant_id=${{ inputs.tenant_id }}&data_type=IAC&save_to_s3=false' --header 'Tenant-Id:${{ inputs.tenant_id  }}' --header 'Authorization:Bearer ${{ inputs.token }}' --form 'file=@"./results.json"'
 
 
 
