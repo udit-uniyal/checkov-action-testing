@@ -36,6 +36,9 @@ jobs:
           endpoint: "cspm.dev.accuknox.com"
           tenant_id: "1069"
 
+      - name: push results
+        run: ./push-results.sh
+
       
         
         
