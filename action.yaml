@@ -51,20 +51,39 @@ branding:
   icon: 'shield'
   color: 'purple'
 
+# runs:
+#   using: 'docker'
+#   image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
+#   args:
+#     - ${{ inputs.file }}
+#     - ${{ inputs.directory }}
+#     - ${{ inputs.compact }}
+#     - ${{ inputs.quiet }}
+#     - ${{ inputs.output_format }}
+#     - ${{ inputs.output_file_path }}
+#     - ${{ inputs.soft_fail }}
+#     - ${{ inputs.framework }}
+#   env:
+#     GITHUB_PAT: ${{ inputs.github_pat }}
+
 runs:
-  using: 'docker'
-  image: 'docker://ghcr.io/bridgecrewio/checkov:3.2.21'
-  args:
-    - ${{ inputs.file }}
-    - ${{ inputs.directory }}
-    - ${{ inputs.compact }}
-    - ${{ inputs.quiet }}
-    - ${{ inputs.output_format }}
-    - ${{ inputs.output_file_path }}
-    - ${{ inputs.soft_fail }}
-    - ${{ inputs.framework }}
-  env:
-    GITHUB_PAT: ${{ inputs.github_pat }}
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-
+    - name: Run Checkov IaC Scan
+      uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
+      with:
+        args: |
+          ${{ inputs.file }}
+          ${{ inputs.directory }}
+          ${{ inputs.compact }}
+          ${{ inputs.quiet }}
+          ${{ inputs.output_format }}
+          ${{ inputs.output_file_path }}
+          ${{ inputs.soft_fail }}
+          ${{ inputs.framework }}
+      env:
+        GITHUB_PAT: ${{ inputs.github_pat }}
 
