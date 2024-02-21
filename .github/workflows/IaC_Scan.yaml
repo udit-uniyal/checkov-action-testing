@@ -29,7 +29,6 @@ jobs:
           # compact: 'true'                 # Do not display code blocks in output
           quiet: 'true'                   # Display only failed checks
           output_format: json
-          output_file_path: console, results.json
           # framework: 'terraform'                # Run only on a specific infrastructure
           # skip_framework: 'dockerfile'         # Skip a specific infrastructure
           soft_fail: 'true'              # Do not return an error code if there are failed checks
@@ -39,26 +38,8 @@ jobs:
           IAC_SCAN_RESULTS: ${{ steps.iac-scan.outputs.output_file_path }}
 
       - name: Pushing Results
-        run: |
-          # Check if results.json file exists
-          if [ -f "${{ github.workspace }}/results.json" ]; then
-            # Print the content of results.json for debugging
-            cat "${{ github.workspace }}/results.json"
-            # Use curl to send the file to the specified endpoint
-            curl --location --request POST "https://${{ env.endpoint }}/api/v1/artifact/?tenant_id=${{ env.tenant_id }}&data_type=IAC&save_to_s3=false" \
-                 --header "Tenant-Id: ${{ env.tenant_id }}" \
-                 --header "Authorization: Bearer ${{ env.token }}" \
-                 --form "file=@${{ github.workspace }}/results.json"
-          else
-            echo "results.json file not found!"
-            exit 1
-          fi
-        env:
-          endpoint: ${{ env.endpoint }}
-          tenant_id: ${{ env.tenant_id }}
-          token: ${{ env.token }} # Assuming you have the auth token stored in GitHub secrets
-      #     curl --location --request POST 'https://${{env.endpoint}}/api/v1/artifact/?tenant_id=${{ env.tenant_id }}&data_type=IAC&save_to_s3=false' --header 'Tenant-Id: ${{ env.tenant_id }}' --header 'Authorization: Bearer ${{ env.token }}' --form file=@./results.json
-          
+        run: ls       
+      
         
         
   # framework: ansible, argo_workflows, arm, azure_pipelines, bicep, bitbucket_pipelines, cdk, circleci_pipelines, cloudformation, dockerfile, github_configuration, github_actions, gitlab_configuration, gitlab_ci, bitbucket_configuration, helm, json, yaml, kubernetes, kustomize, openapi, sca_package, sca_image, secrets, serverless, terraform, terraform_json, terraform_plan, sast, sast_python, sast_java, sast_javascript, 3d_policy.
