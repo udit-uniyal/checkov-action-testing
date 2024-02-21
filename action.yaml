@@ -86,6 +86,6 @@ runs:
               --header "Tenant-Id: ${{ inputs.tenant_id }}" \
               --header "Authorization: Bearer ${{ inputs.token }}" \
               --form "file=@\"./results.json\""
-
+        shell: bash
 
 
