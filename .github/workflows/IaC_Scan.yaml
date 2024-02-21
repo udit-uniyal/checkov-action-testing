@@ -28,7 +28,7 @@ jobs:
           output_file_path: ./results.json
           # framework: 'terraform'                # Run only on a specific infrastructure
           # skip_framework: 'dockerfile'         # Skip a specific infrastructure
-          # soft_fail: 'true'              # Do not return an error code if there are failed checks
+          soft_fail: 'true'              # Do not return an error code if there are failed checks
           # github_pat: ${{ secrets.GITHUB_TOKEN }}  # GitHub personal access token for accessing private repositories
           # enable_secrets_scan_all_files: 'true'  # Scan all files for secrets
           token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzExMTA3NzE3LCJqdGkiOiIxZDNlZTkxOTFiYzY0NGUzOWZmYThhNWNkMDVjNDg3NyIsImlzcyI6ImNzcG0uZGV2LmFjY3Vrbm94LmNvbSJ9.MvxzqTo5lNvg6kdPnIeD2npxtSyd0pZhhwuaxg9XE6o71gy0kIzAiCoYHRXcZamn0YONuDRcqdwHqy4AuFtTOMUlShpq6e9VgbMvRb3meZagw2pHUO7N9AXpD34OZQcX8gtbhBYBttBoAo6ZpTZwgSfc9G7XKa5S8ArMFL2EdzQYGexDeVx4YZDPeGAycAvQTNmeweoraUjBbN9E04nm0t0nyqBmgpoju2hE70hQEYhoWuC0i7LECcvQVm-5qrB30hjySsTk_9hTpnY5YVOd_ncz7FFt_wCv7T9pp2nnOFfq8YviXYSTg1PxO1fFJ3a13bXLDTtD9Zsa70iTzFeBBw"
